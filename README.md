@@ -8,4 +8,4 @@ Accompanying blog post [coming soon](http://bernhardwenzel.com).
 
 ## Build & run
 
-You can follow the guide documentation. Basically, cd into `<project>/initial` and run `gradle run`.
+You can follow the guide documentation. Basically, cd into `<project>/complete-scala` (the guide's Java version can be found under `project/complete-java`) and run `gradle run`.
