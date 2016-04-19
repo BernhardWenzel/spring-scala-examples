@@ -11,6 +11,10 @@ apply plugin: 'java'
 apply plugin: 'eclipse'
 apply plugin: 'idea'
 apply plugin: 'spring-boot'
+apply plugin: 'scala'
+apply plugin: 'application'
+
+mainClassName = "hello.Application"
 
 jar {
     baseName = 'gs-consuming-rest'
@@ -21,13 +25,15 @@ repositories {
     mavenCentral()
 }
 
-sourceCompatibility = 1.8
-targetCompatibility = 1.8
+applicationDefaultJvmArgs = [
+        "-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=5005"
+]
 
 dependencies {
     compile("org.springframework.boot:spring-boot-starter")
     compile("org.springframework:spring-web")
     compile("com.fasterxml.jackson.core:jackson-databind")
+    compile 'org.scala-lang:scala-library:2.11.1'
     testCompile("junit:junit")
 }
 
