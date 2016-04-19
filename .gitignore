@@ -15,3 +15,14 @@ project/plugins/project/
 # Scala-IDE specific
 .scala_dependencies
 .worksheet
+
+# idea files
+.idea
+*.iml
+*.ids
+*.ipr
+*.iws
+
+build/
+.travis.yml
+.gradle
