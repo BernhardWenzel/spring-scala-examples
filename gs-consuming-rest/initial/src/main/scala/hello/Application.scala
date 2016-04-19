@@ -13,6 +13,7 @@ class Application extends CommandLineRunner{
 
   override def run(args: String*): Unit = {
     val restTemplate = new RestTemplate()
+
     // synchronous version
     val quote : Quote =  restTemplate.getForObject("http://gturnquist-quoters.cfapps.io/api/random", classOf[Quote])
     log.info(quote.toString)
@@ -21,16 +22,10 @@ class Application extends CommandLineRunner{
     val asyncRestTemplate = new AsyncRestTemplate()
     val quoteFuture : ListenableFuture[ResponseEntity[Quote]] =  asyncRestTemplate.getForEntity("http://gturnquist-quoters.cfapps.io/api/random", classOf[Quote])
 
-//    quoteFuture.addCallback(new ListenableFutureCallback[ResponseEntity[Quote]]() {
-//      override def onSuccess(entity : ResponseEntity[Quote]) : Unit = log.info("async: " + quote.toString)
-//      override def onFailure(t : Throwable) : Unit = ???
-//    })
-
-
-    quoteFuture.addCallback(
-      (entity : ResponseEntity[Quote]) -> log.info("async: " + quote.toString),
-      (t : Throwable) -> ???
-    )
+    quoteFuture.addCallback(new ListenableFutureCallback[ResponseEntity[Quote]]() {
+      override def onSuccess(entity : ResponseEntity[Quote]) : Unit = log.info("async: " + quote.toString)
+      override def onFailure(t : Throwable) : Unit = log.error("Async error", t)
+    })
   }
 }
 

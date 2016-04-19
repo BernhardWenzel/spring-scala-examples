@@ -5,3 +5,7 @@ I have taken some guides from the [Spring.io website](https://spring.io/guides/)
 **I'm going to demonstrate this at [Spring I/O 2016](http://lanyrd.com/sdzkgm) in my talk: "Using Spring with Scala"**
 
 Accompanying blog post [coming soon](http://bernhardwenzel.com).
+
+## Build & run
+
+You can follow the guide documentation. Basically, cd into `<project>/initial` and run `gradle run`.
