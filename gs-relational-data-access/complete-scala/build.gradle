@@ -8,15 +8,16 @@ buildscript {
 }
 
 apply plugin: 'java'
+apply plugin: 'scala'
+apply plugin: 'application'
 apply plugin: 'eclipse'
 apply plugin: 'idea'
 apply plugin: 'spring-boot'
-apply plugin: 'application'
 
 mainClassName = "hello.Application"
 
 jar {
-    baseName = 'gs-consuming-rest'
+    baseName = 'gs-relational-data-access'
     version =  '0.1.0'
 }
 
@@ -24,13 +25,18 @@ repositories {
     mavenCentral()
 }
 
+applicationDefaultJvmArgs = [
+        "-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=5005"
+]
+
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
 
 dependencies {
     compile("org.springframework.boot:spring-boot-starter")
-    compile("org.springframework:spring-web")
-    compile("com.fasterxml.jackson.core:jackson-databind")
+    compile("org.springframework:spring-jdbc")
+    compile("com.h2database:h2")
+    compile("org.scala-lang:scala-library:2.11.1")
     testCompile("junit:junit")
 }
 

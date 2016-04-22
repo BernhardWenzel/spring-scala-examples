@@ -23,7 +23,7 @@ class Application extends CommandLineRunner{
     val quoteFuture : ListenableFuture[ResponseEntity[Quote]] =  asyncRestTemplate.getForEntity("http://gturnquist-quoters.cfapps.io/api/random", classOf[Quote])
 
     quoteFuture.addCallback(new ListenableFutureCallback[ResponseEntity[Quote]]() {
-      override def onSuccess(entity : ResponseEntity[Quote]) : Unit = log.info("async: " + quote.toString)
+      override def onSuccess(entity : ResponseEntity[Quote]) : Unit = log.info("async: " + entity.getBody.toString)
       override def onFailure(t : Throwable) : Unit = log.error("Async error", t)
     })
   }
