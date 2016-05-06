@@ -4,7 +4,7 @@ I have taken some guides from the [Spring.io website](https://spring.io/guides/)
 
 **I'm going to demonstrate this at [Spring I/O 2016](http://lanyrd.com/sdzkgm) in my talk: "Using Spring with Scala"**
 
-Accompanying blog post can be found [here](http://bernhardwenzel.com/blog/2016/04/22/using-spring-with-scala/#examples-examples-examples).
+Accompanying blog post can be found [here](http://bernhardwenzel.com/blog/2016/04/22/using-spring-with-scala).
 
 ## Build & run
 

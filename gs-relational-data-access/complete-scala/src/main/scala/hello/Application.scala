@@ -29,12 +29,12 @@ class Application extends CommandLineRunner {
     jdbcTemplate.execute("CREATE TABLE customers(" +
       "id SERIAL, first_name VARCHAR(255), last_name VARCHAR(255))")
 
-    val splitUpNames: mutable.Buffer[Array[AnyRef]] = ListBuffer("John Woo", "Jeff Dean", "Josh Bloch", "Josh Long").map(_.split(" ")).asInstanceOf[mutable.Buffer[Array[AnyRef]]]
+    val splitUpNames = ListBuffer("John Woo", "Jeff Dean", "Josh Bloch", "Josh Long").map(_.split(" "))
     splitUpNames.foreach(name => log.info("Inserting customer record for %s %s".format(name(0), name(1))))
 
-    jdbcTemplate.batchUpdate("INSERT INTO customers(first_name, last_name) VALUES (?,?)", splitUpNames.asJava)
-    log.info("Querying for customer records where first_name = 'Josh':")
+    jdbcTemplate.batchUpdate("INSERT INTO customers(first_name, last_name) VALUES (?,?)", splitUpNames.asInstanceOf[mutable.Buffer[Array[AnyRef]]].asJava)
 
+    log.info("Querying for customer records where first_name = 'Josh':")
     jdbcTemplate.query(
       "SELECT id, first_name, last_name FROM customers WHERE first_name = ?",
       Array("Josh").asInstanceOf[Array[AnyRef]],
