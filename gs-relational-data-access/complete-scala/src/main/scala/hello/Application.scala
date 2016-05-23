@@ -38,10 +38,12 @@ class Application extends CommandLineRunner {
     jdbcTemplate.query(
       "SELECT id, first_name, last_name FROM customers WHERE first_name = ?",
       Array("Josh").asInstanceOf[Array[AnyRef]],
-      // no Java 8 Lambda support in Scala yet
+      // no Java 8 Lambda support in Scala pre 2.12
       new RowMapper[Customer]{
         override def mapRow(rs: ResultSet, rowNum: Int): Customer = new Customer(rs.getLong("id"), rs.getString("first_name"), rs.getString("last_name"))
       })
+      // Works in Scala 2.12
+      // (rs: ResultSet, rowNum: Int) => new Customer(rs.getLong("id"), rs.getString("first_name"), rs.getString("last_name"))    )
       .asScala.foreach((customer:Customer) => log.info(customer.toString))
   }
 }
